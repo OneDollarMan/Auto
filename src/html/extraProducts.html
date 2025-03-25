@@ -1,0 +1,253 @@
+<div class="page__content page-content">
+    <header class="page-content__header border-bottom">
+        <h1>Группы дополняющих товаров</h1>
+    </header>
+    <div>
+        <div id="extraProdsFilter">
+            <div class="mb-3">
+                <button id="extraProdsUpdateOpen" class="btn btn-primary" data-bs-toggle="modal"
+                    data-bs-target="#extraProdsUpdateModal">Подать данные</button>
+            </div>
+            <div class="d-flex justify-content-between mb-3">
+                <button class="equip-filter__toggle" type="button" data-bs-toggle="collapse" aria-expanded="false"
+                    aria-controls="filterCollapse" data-bs-target="#filterCollapse">Фильтры <img
+                        src="./public/images/icons/angle.svg" alt="angle" class="equip-filter__toggle-icon"></button>
+                <form onsubmit="extraProdsDownload(event);" class="d-flex align-items-center">
+                    <label class="me-4">
+                        <input class="form-check-input" type="radio" name="format" value="xlsx" checked>
+                        xlsx
+                    </label>
+                    <label class="me-4">
+                        <input class="form-check-input" type="radio" name="format" value="csv">
+                        csv
+                    </label>
+                    <button class="btn btn-outline-primary">Выгрузить</button>
+                </form>
+            </div>
+
+            <div id="filterCollapse" class="mb-3 collapse">
+                <form onsubmit="extraProdsFilter(event);">
+                    <div class="row">
+                        <div class="col-3 p-3">
+                            <label for="user" class="d-block form-label">Код поставщика</label>
+                            <input class="form-control" list="userDatalist" id="user" placeholder="Код поставщика">
+                            <datalist id="userDatalist">
+                                <option value="Поставщик 1">
+                                <option value="Поставщик 2">
+                                <option value="Поставщик 3">
+                                <option value="Поставщик 4">
+                                <option value="Поставщик 5">
+                            </datalist>
+                        </div>
+                        <div class="col-3 p-3">
+                            <label for="type" class="d-block form-label">Код позиции</label>
+                            <input class="form-control" list="typeDatalist" id="type" name="type"
+                                placeholder="Код позиции">
+                            <datalist id="typeDatalist">
+                                <option value="Код позиции 1">
+                                <option value="Код позиции 2">
+                                <option value="Код позиции 3">
+                                <option value="Код позиции 4">
+                                <option value="Код позиции 5">
+                            </datalist>
+                        </div>
+                        <div class="col-3 p-3">
+                            <label for="userDataList" class="d-block form-label">Группа дополняющих товаров</label>
+                            <input class="form-control" list="groupDatalist" id="group" name="group"
+                                placeholder="Группа дополняющих товаров">
+                            <datalist id="groupDatalist">
+                                <option value="Группа 1">
+                                <option value="Группа 2">
+                                <option value="Группа 3">
+                                <option value="Группа 4">
+                                <option value="Группа 5">
+                            </datalist>
+                        </div>
+                        <div class="col-3 p-3">
+                            <label for="unit" class="d-block form-label">Автор</label>
+                            <input class="form-control" list="unitDatalist" id="unit" name="unit" placeholder="Автор">
+                            <datalist id="unitDatalist">
+                                <option value="Автор 1">
+                                <option value="Автор 2">
+                                <option value="Автор 3">
+                                <option value="Автор 4">
+                                <option value="Автор 5">
+                            </datalist>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+
+                    </div>
+                    <div class="text-end">
+                        <button class="btn btn-outline-primary me-4" type="reset">Очистить</button>
+                        <button class="btn btn-primary" type="submit">Применить</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+        <div class="tab-list">
+            <div class="mb-3 tab-list__nav">
+
+                <button class="btn tab-list__btn tab-list__btn--active" data-tab="view"
+                    onclick="openTab(this);">Просмотр</button>
+                <button class="btn tab-list__btn" data-tab="history" onclick="openTab(this);">История загрузок</button>
+            </div>
+            <div>
+                <div id="view" class="tab-list__item tab-list__item--active">
+                    <div>
+                        <table id="extraProdsResult" class="table">
+                            <thead>
+                                <tr>
+                                    <th>ID | Выбрать</th>
+                                    <th>Название группы</th>
+                                    <th>Код позиции</th>
+                                    <th>Наименование</th>
+                                    <th>Поставщик</th>
+                                    <th>Автор</th>
+                                    <th>Действия</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>--</td>
+                                    <td>--</td>
+                                    <td>--</td>
+                                    <td>--</td>
+                                    <td>--</td>
+                                    <td>--</td>
+                                    <td>
+                                        <button class="btn py-0 px-2 btn-equip">
+                                            <i class="fa fa-pen"></i>
+                                        </button>
+                                        <button class="btn py-0 px-2 btn-equip--download">
+                                            <i class="fa fa-xmark"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div id="history" class="tab-list__item">
+                    <table id="quipHistory" class="table">
+                        <thead>
+                            <tr>
+                                <th>ID | Выбрать</th>
+                                <th>Пользователь</th>
+                                <th>Дата</th>
+                                <th>Название группы</th>
+                                <th>Код позиции</th>
+                                <th>Поставщик</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>2</td>
+                                <td>3</td>
+                                <td>4</td>
+                                <td>5</td>
+                                <td>6</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="extraProdsUpdateModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">Создать группу дополняющих товаров</div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <form class="form" onsubmit="extraProdsUpdate(event);">
+                <div class="modal-body">
+                    <div class="form-group mb-3">
+                        <div class="row justify-content-between align-items-center">
+                            <div class="col-5">Название группы</div>
+                            <div class="col-7">
+                                <input class="form-control" id="groupName" name="groupName"
+                                    placeholder="Название группы">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="table-responsive mb-3">
+                        <table class="table table-borderless">
+                            <thead>
+                                <tr>
+                                    <th width="60%">Код позиции</th>
+                                    <th width="35%">Основной товар</th>
+                                    <th width="5%"></th>
+                                </tr>
+                            </thead>
+                            <tbody id="positionCodesContainer">
+                                <tr class="position-code-group">
+                                    <td>
+                                        <input class="form-control" list="positionCodeDatalist" name="positionCode[]"
+                                            placeholder="Код позиции">
+                                    </td>
+                                    <td class="align-middle">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="mainProduct" value="0"
+                                                checked>
+                                            <label class="form-check-label">Основной</label>
+                                        </div>
+                                    </td>
+                                    <td class="align-middle">
+                                        <button type="button" class="btn btn-sm btn-success"
+                                            onclick="addPositionCodeField()">+</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <datalist id="positionCodeDatalist">
+                        <option value="Позиция 1">
+                        <option value="Позиция 2">
+                        <option value="Позиция 3">
+                        <option value="Позиция 4">
+                        <option value="Позиция 5">
+                    </datalist>
+
+                    <div class="form-group mb-1">
+                        <div class="row justify-content-between align-items-center">
+                            <div class="col-5">
+                                <label for="template" class="form-label">Загрузить шаблон</label>
+                            </div>
+                            <div class="col-7">
+                                <input class="form-control" type="file" id="template">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3 text-end">
+                        <a href="#">Шаблон загрузки данных</a>
+                    </div>
+                    <div class="form-group">
+                        <label class="d-block form-check-label">
+                            <input class="form-check-input m-0" type="checkbox" name="check">
+                            Сформировать проверочный отчет
+                        </label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-outline-secondary form__submit" type="reset"
+                        _data-bs-dismiss="modal">Очистить</button>
+                    <button class="btn btn-primary form__submit" type="submit"
+                        _data-bs-dismiss="modal">Сохранить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+
+</script>
