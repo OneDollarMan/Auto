@@ -1,0 +1,304 @@
+<div class="page__content page-content">
+  <header class="page-content__header border-bottom">
+    <h1>Оборудование: Подать информацию по оборудованию</h1>
+  </header>
+  <div>
+    <div id="equipFilter">
+      <div class="mb-3">
+        <button id="equipUpdateOpen" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#euqipUpdateModal">Актуализировать данные
+          по типу оборудования</button>
+      </div>
+      <div class="d-flex justify-content-between mb-3">
+        <button
+        class="equip-filter__toggle"
+        type="button"
+        data-bs-toggle="collapse"
+        aria-expanded="false"
+        aria-controls="filterCollapse"
+        data-bs-target="#filterCollapse"
+        >Фильтры <img src="data:image/svg+xml,%3csvg%20width='20'%20height='20'%20viewBox='0%200%2020%2020'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cg%20opacity='0.8'%3e%3cpath%20d='M8%2014L12%2010L8%206'%20stroke='black'%20stroke-linecap='round'%20stroke-linejoin='round'/%3e%3c/g%3e%3c/svg%3e" alt="angle"
+            class="equip-filter__toggle-icon"></button>
+        <form onsubmit="equipDownload(event);" class="d-flex align-items-center">
+          <label class="me-4">
+            <input class="form-check-input" type="radio" name="format" value="xlsx" checked>
+            xlsx
+          </label>
+          <label class="me-4">
+            <input class="form-check-input" type="radio" name="format" value="csv">
+            csv
+          </label>
+          <button class="btn btn-outline-primary">Выгрузить</button>
+        </form>
+      </div>
+
+      <div id="filterCollapse" class="mb-3 collapse">
+        <form onsubmit="equipFilter(event);">
+          <div class="row">
+            <div class="col-3 p-3">
+              <label for="user" class="d-block form-label">Пользователь</label>
+              <input class="form-control" list="userDatalist" id="user" placeholder="Имя пользователя">
+              <datalist id="userDatalist">
+                <option value="Пользователь 1">
+                <option value="Пользователь 2">
+                <option value="Пользователь 3">
+                <option value="Пользователь 4">
+                <option value="Пользователь 5">
+              </datalist>
+            </div>
+            <div class="col-3 p-3">
+              <label for="type" class="d-block form-label">Тип оборудования</label>
+              <input class="form-control" list="typeDatalist" id="type" name="type" placeholder="Имя пользователя">
+              <datalist id="typeDatalist">
+                <option value="Тип 1">
+                <option value="Тип 2">
+                <option value="Тип 3">
+                <option value="Тип 4">
+                <option value="Тип 5">
+              </datalist>
+            </div>
+            <div class="col-3 p-3">
+              <label for="userDataList" class="d-block form-label">Группа товаров</label>
+              <input class="form-control" list="groupDatalist" id="group" name="group" placeholder="Имя пользователя">
+              <datalist id="groupDatalist">
+                <option value="Группа 1">
+                <option value="Группа 2">
+                <option value="Группа 3">
+                <option value="Группа 4">
+                <option value="Группа 5">
+              </datalist>
+            </div>
+            <div class="col-3 p-3">
+              <label for="unit" class="d-block form-label">Единица измерения</label>
+              <input class="form-control" list="unitDatalist" id="unit" name="unit" placeholder="Имя пользователя">
+              <datalist id="unitDatalist">
+                <option value="Единица измерения 1">
+                <option value="Единица измерения 2">
+                <option value="Единица измерения 3">
+                <option value="Единица измерения 4">
+                <option value="Единица измерения 5">
+              </datalist>
+            </div>
+            <div class="col-3 p-3">
+              <div class="d-block form-label">Формат вместимости</div>
+              <div class="d-flex align-items-center gap-4">
+                <label>
+                  <input class="form-check-input m-0" type="radio" name="format" value="face" checked>
+                  Фейс
+                </label>
+                <label>
+                  <input class="form-check-input m-0" type="radio" name="format" value="length">
+                  Длинна полки см.
+                </label>
+              </div>
+            </div>
+            <div class="col-3 p-3">
+              <div class="d-block form-label">Действие</div>
+              <div class="d-flex align-items-center gap-4">
+                <label>
+                  <input class="form-check-input m-0" type="radio" name="format" value="input" checked>
+                  Ввод
+                </label>
+                <label>
+                  <input class="form-check-input m-0" type="radio" name="format" value="output">
+                  Вывод
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="mb-3">
+
+          </div>
+          <div class="text-end">
+            <button class="btn btn-outline-primary me-4" type="reset">Очистить</button>
+            <button class="btn btn-primary" type="submit">Применить</button>
+          </div>
+        </form>
+      </div>
+
+    </div>
+    <div class="tab-list">
+      <div class="mb-3 tab-list__nav">
+
+        <button class="btn tab-list__btn tab-list__btn--active" data-tab="result" onclick="openTab(this);">Просмотр</button>
+        <button class="btn tab-list__btn" data-tab="history" onclick="openTab(this);">История загрузок</button>
+      </div>
+      <div>
+        <div id="result" class="tab-list__item tab-list__item--active">
+          <div>
+            <table id="equipResult" class="table">
+              <thead>
+                <tr>
+                  <th>ID  | Выбрать</th>
+                  <th>Пользователь</th>
+                  <th>Тип оборудования</th>
+                  <th>Марка	Единица измерения	</th>
+                  <th>Группа товаров</th>
+                  <th>Вместимость</th>
+                  <th>Действие</th>
+                  <th>Дата загрузки</th>
+                  <th>Статус</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>ID  | Выбрать</td>
+                  <td>Пользователь</td>
+                  <td>Тип оборудования</td>
+                  <td>Марка	Единица измерения	</td>
+                  <td>Группа товаров</td>
+                  <td>Вместимость</td>
+                  <td>Действие</td>
+                  <td>Дата загрузки</td>
+                  <td>Статус</td>
+      
+                </tr>
+              </tbody>
+            </table>
+          </div>
+  
+        </div>
+        <div id="history" class="tab-list__item">
+          <table id="quipHistory" class="table">
+            <thead>
+              <tr>
+                <th>ID | Выбрать</th>
+                <th>Тип оборудования</th>
+                <th>Товарная группа</th>
+                <th>Единица измерения</th>
+                <th>Группа товаров</th>
+                <th>Вместимость</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>2</td>
+                <td>3</td>
+                <td>4</td>
+                <td>5</td>
+                <td>6</td>
+                <td>
+                  <button class="btn py-0 px-2 btn-equip">
+                    <i class="fa fa-pen"></i>
+                  </button>
+                  <button class="btn py-0 px-2 btn-equip--download">
+                    <i class="fa fa-xmark"></i>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="euqipUpdateModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-title">Актуализировать данные по типу оборудования</div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <form class="form" onsubmit="equipUpdate(event);">
+        <div class="modal-body">
+          <div class="mb-3 form-group">
+            <div class="row justify-content-between align-items-center">
+              <div class="col-5">Шифтер</div>
+              <div class="col-7 d-flex align-items-center gap-2">
+                <label><input class="form-check-input" type="radio" name="shifter" value="yes"> Ввод</label>
+                <label><input class="form-check-input" type="radio" name="shifter" value="no"> Вывод</label>
+              </div>
+            </div>
+          </div>
+          <div class="form-group mb-3">
+            <div class="row justify-content-between align-items-center">
+            <div class="col-5">Тип оборудования</div>
+            <div class="col-7">
+              <input class="form-control" list="typeDatalist" id="type" name="type" placeholder="Тип оборудования">
+              <datalist id="typeDatalist">
+                <option value="Тип 1">
+                <option value="Тип 2">
+                <option value="Тип 3">
+                <option value="Тип 4">
+                <option value="Тип 5">
+              </datalist>
+            </div>
+            </div>
+          </div>
+          <div class="form-group mb-3">
+            <div class="row justify-content-between align-items-center">
+
+            <div class="col-5">Марка оборудования</div>
+            <div class="col-7">
+            <input class="form-control" list="brandDatalist" id="brand" name="brand" placeholder="Марка оборудования">
+            <datalist id="brandDatalist">
+              <option value="Марка 1">
+              <option value="Марка 2">
+              <option value="Марка 3">
+              <option value="Марка 4">
+              <option value="Марка 5">
+            </datalist>
+            </div>
+            </div>
+          </div>
+          <div class="form-group mb-3">
+            <div class="row justify-content-between align-items-center">
+
+            <label for="userDataList" class="d-block col-5">Группа товаров</label>
+            <div class="col-7">
+            <input class="form-control" list="groupDatalist" id="group" name="group" placeholder="Имя пользователя">
+            <datalist id="groupDatalist">
+              <option value="Группа 1">
+              <option value="Группа 2">
+              <option value="Группа 3">
+              <option value="Группа 4">
+              <option value="Группа 5">
+            </datalist>
+          </div>
+          </div>
+          </div>
+          <div class="form-group mb-3">
+            <div class="row justify-content-between align-items-center">
+
+            <label for="volume" class="d-block col-5">Вместимость/длинна</label>
+            <div class="col-7">
+            <input class="form-control" id="volume" name="volume" placeholder="Вместимость/длинна">
+          </div>
+          </div>
+          </div>
+          <div class="form-group mb-1">
+            <div class="row justify-content-between align-items-center">
+              <div class="col-5">
+
+                <label for="template" class="form-label">Загрузить шаблон</label>
+              </div>
+              <div class="col-7">
+
+                <input class="form-control" type="file" id="template">
+              </div>
+            </div>
+          </div>
+          <div class="mb-3 text-end">
+            <a href="#">Шаблон загрузки данных</a>
+          </div>
+          <div class="form-group">
+            <label class="d-block form-check-label">
+              <input class="form-check-input m-0" type="checkbox" name="check">
+              Сформировать проверочный отчет
+            </label>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-outline-secondary form__submit" type="reset" _data-bs-dismiss="modal">Очистить</button>
+          <button class="btn btn-primary form__submit" type="submit" _data-bs-dismiss="modal">Сохранить</button>
+
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
