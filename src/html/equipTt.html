@@ -5,18 +5,13 @@
   <div>
     <div id="equipFilter">
       <div class="mb-3">
-        <button id="equipUpdateOpen" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#euqipTtUpdateModal">Актуализировать данные по ТТ</button>
+        <button id="equipUpdateOpen" class="btn btn-primary" data-bs-toggle="modal"
+          data-bs-target="#euqipTtUpdateModal">Актуализировать данные по ТТ</button>
       </div>
       <div class="d-flex justify-content-between mb-3">
-        <button
-        class="equip-filter__toggle"
-        type="button"
-        data-bs-toggle="collapse"
-        aria-expanded="false"
-        aria-controls="filterCollapse"
-        data-bs-target="#filterCollapse"
-        >Фильтры <img src="/public/images/icons/angle.svg" alt="angle"
-            class="equip-filter__toggle-icon"></button>
+        <button class="equip-filter__toggle" type="button" data-bs-toggle="collapse" aria-expanded="false"
+          aria-controls="filterCollapse" data-bs-target="#filterCollapse">Фильтры <img
+            src="/public/images/icons/angle.svg" alt="angle" class="equip-filter__toggle-icon"></button>
         <form onsubmit="equipDownload(event);" class="d-flex align-items-center">
           <label class="me-4">
             <input class="form-check-input" type="radio" name="format" value="xlsx" checked>
@@ -34,9 +29,10 @@
         <form onsubmit="equipFilter(event);">
           <div class="row">
             <div class="col-3 p-3">
-              <label for="user" class="d-block form-label">Код точки*</label>
-              <input class="form-control" list="userDatalist" id="user" placeholder="Имя пользователя" required>
-              <datalist id="userDatalist">
+              <label for="salePoint" class="d-block form-label">Код торговой точки</label>
+              <input class="form-control" list="salePointDatalist" id="salePoint" placeholder="Код торговой точки"
+                required>
+              <datalist id="salePointDatalist">
                 <option value="Код точки 1">
                 <option value="Код точки 2">
                 <option value="Код точки 3">
@@ -46,7 +42,7 @@
             </div>
             <div class="col-3 p-3">
               <label for="type" class="d-block form-label">Тип оборудования</label>
-              <input class="form-control" list="typeDatalist" id="type" name="type" placeholder="Имя пользователя">
+              <input class="form-control" list="typeDatalist" id="type" name="type" placeholder="Тип оборудования">
               <datalist id="typeDatalist">
                 <option value="Тип 1">
                 <option value="Тип 2">
@@ -56,7 +52,7 @@
               </datalist>
             </div>
             <div class="col-3 p-3">
-              <label for="user" class="d-block form-label">Пользователь</label>
+              <label for="user" class="d-block form-label">Имя пользователя</label>
               <input class="form-control" list="userDatalist" id="user" placeholder="Имя пользователя">
               <datalist id="userDatalist">
                 <option value="Пользователь 1">
@@ -91,7 +87,8 @@
     <div class="tab-list">
       <div class="mb-3 tab-list__nav">
 
-        <button class="btn tab-list__btn tab-list__btn--active" data-tab="view" onclick="openTab(this);">Просмотр</button>
+        <button class="btn tab-list__btn tab-list__btn--active" data-tab="view"
+          onclick="openTab(this);">Просмотр</button>
         <button class="btn tab-list__btn" data-tab="history" onclick="openTab(this);">История загрузок</button>
       </div>
       <div>
@@ -100,10 +97,10 @@
             <table id="equipTtResult" class="table">
               <thead>
                 <tr>
-                  <th>ID  | Выбрать</th>
+                  <th>ID | Выбрать</th>
                   <th>Пользователь</th>
                   <th>Тип оборудования</th>
-                  <th>Марка	Единица измерения	</th>
+                  <th>Марка Единица измерения </th>
                   <th>Группа товаров</th>
                   <th>Вместимость</th>
                   <th>Действие</th>
@@ -113,21 +110,21 @@
               </thead>
               <tbody>
                 <tr>
-                  <td>ID  | Выбрать</td>
+                  <td>ID | Выбрать</td>
                   <td>Пользователь</td>
                   <td>Тип оборудования</td>
-                  <td>Марка	Единица измерения	</td>
+                  <td>Марка Единица измерения </td>
                   <td>Группа товаров</td>
                   <td>Вместимость</td>
                   <td>Действие</td>
                   <td>Дата загрузки</td>
                   <td>Статус</td>
-      
+
                 </tr>
               </tbody>
             </table>
           </div>
-  
+
         </div>
         <div id="history" class="tab-list__item">
           <table id="quipTtHistory" class="table">
@@ -188,50 +185,42 @@
           </div>
           <div class="form-group mb-3">
             <div class="row justify-content-between align-items-center">
-            <div class="col-5">Код ТТ</div>
-            <div class="col-7">
-              <input class="form-control" list="typeDatalist" id="type" name="type" placeholder="Тип оборудования">
-              <datalist id="typeDatalist">
-                <option value="Код ТТ 1">
-                <option value="Код ТТ 2">
-                <option value="Код ТТ 3">
-                <option value="Код ТТ 4">
-                <option value="Код ТТ 5">
-              </datalist>
+              <label for="salePoint" class="d-block col-5">Код торговой точки</label>
+              <div class="col-7">
+                <input class="form-control" list="salePointDatalist" id="salePoint" name="salePoint" placeholder="Код торговой точки">
+              </div>
             </div>
+          </div>
+          <div class="form-group mb-3">
+            <div class="row justify-content-between align-items-center">
+              <label for="type" class="d-block col-5">Тип оборудования</label>
+              <div class="col-7">
+                <input class="form-control" list="typeDatalist" id="type" name="type" placeholder="Тип оборудования">
+                <datalist id="typeDatalist">
+                  <option value="Тип 1">
+                  <option value="Тип 2">
+                  <option value="Тип 3">
+                  <option value="Тип 4">
+                  <option value="Тип 5">
+                </datalist>
+              </div>
             </div>
           </div>
           <div class="form-group mb-3">
             <div class="row justify-content-between align-items-center">
 
-            <div class="col-5">Тип оборудования</div>
-            <div class="col-7">
-            <input class="form-control" list="brandDatalist" id="brand" name="brand" placeholder="Тип оборудования">
-            <datalist id="brandDatalist">
-              <option value="Тип 1">
-              <option value="Тип 2">
-              <option value="Тип 3">
-              <option value="Тип 4">
-              <option value="Тип 5">
-            </datalist>
+              <label for="group" class="d-block col-5">Группа товаров</label>
+              <div class="col-7">
+                <input class="form-control" list="groupDatalist" id="group" name="group" placeholder="Группа товаров">
+                <datalist id="groupDatalist">
+                  <option value="Группа 1">
+                  <option value="Группа 2">
+                  <option value="Группа 3">
+                  <option value="Группа 4">
+                  <option value="Группа 5">
+                </datalist>
+              </div>
             </div>
-            </div>
-          </div>
-          <div class="form-group mb-3">
-            <div class="row justify-content-between align-items-center">
-
-            <label for="userDataList" class="d-block col-5">Группа товаров</label>
-            <div class="col-7">
-            <input class="form-control" list="groupDatalist" id="group" name="group" placeholder="Имя пользователя">
-            <datalist id="groupDatalist">
-              <option value="Группа 1">
-              <option value="Группа 2">
-              <option value="Группа 3">
-              <option value="Группа 4">
-              <option value="Группа 5">
-            </datalist>
-          </div>
-          </div>
           </div>
           <div class="form-group mb-3">
             <div class="row justify-content-between align-items-center">
@@ -243,8 +232,8 @@
             </div>
           </div>
           <div class="form-group mb-3">
-              <label for="comment" class="d-block form-label">Комментарий</label>
-              <textarea name="comment" id="comment" rows="5" class="form-control"></textarea>
+            <label for="comment" class="d-block form-label">Комментарий</label>
+            <textarea name="comment" id="comment" rows="5" class="form-control"></textarea>
           </div>
           <div class="form-group mb-1">
             <div class="row justify-content-between align-items-center">

@@ -15,6 +15,7 @@ export default defineConfig({
 				clustering: resolve(__dirname, 'src/html/clustering.html'),
 				extraProducts: resolve(__dirname, 'src/html/extraProducts.html'),
 				similarProducts: resolve(__dirname, 'src/html/similarProducts.html'),
+				dataLoadVerification: resolve(__dirname, 'src/html/dataLoadVerification.html'),
 			}
 		}
 	}
